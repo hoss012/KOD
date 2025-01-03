@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ar" dir="rtl"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>البطارسة</title> 
+  <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: "Cairo", sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+        }
+
+        .rectangle {
+            background-color: purple;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .button {
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: darkviolet;
+        }
+
+        .content {
+            text-align: center;
+            font-size: 1.2em;
+            padding: 20px;
+        }
+
+        .form-container {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            text-align: right;
+        }
+
+        .form-container input, .form-container textarea, .form-container button, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container input:focus, .form-container textarea:focus, .form-container select:focus {
+            outline: 2px solid purple;
+        }
+
+        .form-container button {
+            background-color: purple;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .form-container button:hover {
+            background-color: darkviolet;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background-color: darkviolet;
+        }
+    </style> 
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet"> 
+ </head> 
+ <body> 
+  <div class="rectangle">
+    البطارسة 
+  </div> <button class="back-button" onclick="goBack()">∆</button> 
+  <div class="buttons-container" id="buttons-container"> <button class="button" onclick="showPresidentInfo()">الرئيس والانتخابات</button> <button class="button" onclick="showJoinForm()">انضمام</button> <button class="button" onclick="showMembers()">الأعضاء</button> <button class="button" onclick="showRules()">القواعد</button> 
+  </div> 
+  <div class="content" id="content"></div> 
+  <div class="form-container" id="form-container"> 
+   <h2>طلب انضمام</h2> 
+   <input type="text" id="name" placeholder="الاسم"> 
+   <div> <label for="country-code">رمز الدولة:</label> <select id="country-code"> <option value="+20">🇪🇬 +20 مصر</option> <option value="+966">🇸🇦 +966 السعودية</option> <option value="+971">🇦🇪 +971 الإمارات</option> <option value="+1">🇺🇸 +1 الولايات المتحدة</option> <option value="+44">🇬🇧 +44 المملكة المتحدة</option> </select> 
+   </div> 
+   <input type="text" id="phone" placeholder="رقم الهاتف"> 
+   <input type="text" id="country" placeholder="الدولة"> <textarea id="reason" placeholder="لماذا تريد أن تكون بطرسي؟"></textarea> <button onclick="sendJoinRequest()">إرسال</button> 
+  </div> 
+  <script>
+        let members = [];
+
+        function showPresidentInfo() {
+            hideButtons();
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>الشيخ عبد الرحمن البطرسي</h2>
+                <p>الشيخ عبد الرحمن البطرسي هو قائد عظيم يبلغ من العمر 17 سنة.</p>
+                <p>يتميز بحكمته ورؤيته الفريدة لمستقبل البطارسة.</p>
+            `;
+        }
+
+        function showRules() {
+            hideButtons();
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>القواعد ودستور البطارسة</h2>
+                <ul style="text-align: left; list-style: none; padding: 0;">
+                    <li>1. الزعيم يتم اختياره عبر انتخابات ديمقراطية.</li>
+                    <li>2. فترة ولاية الزعيم شهر واحد فقط.</li>
+                    <li>3. احترام جميع أعضاء المجموعة واجب.</li>
+                    <li>4. الالتزام بتنفيذ قرارات الزعيم خلال ولايته.</li>
+                    <li>5. عدم انتهاك خصوصية الأعضاء أو التحدث عنهم بسوء.</li>
+                    <li>6. العمل الجماعي هو أساس نجاح البطارسة.</li>
+                    <li>7. أي عضو يخالف القواعد يُعرض للاستبعاد بعد التشاور الجماعي.</li>
+                </ul>
+                <p>دستور البطارسة يهدف إلى بناء بيئة إيجابية قائمة على التعاون والاحترام المتبادل.</p>
+            `;
+        }
+
+        function showMembers() {
+            hideButtons();
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h2>الأعضاء</h2>
+                <p>عدد الأعضاء: ${members.length}</p>
+                <ul style="text-align: left; padding: 0;">
+                    ${members.map((member, index) => `
+                        <li style="margin-bottom: 10px;">
+                            ${member.name} <button onclick="showMemberInfo(${index})">المعلومات</button>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+        }
+
+        function showMemberInfo(index) {
+            const member = members[index];
+            alert(`الاسم: ${member.name}\nرقم الهاتف: ${member.phone}\nالدولة: ${member.country}\nالسبب: ${member.reason}`);
+        }
+
+        function showJoinForm() {
+            hideButtons();
+            const formContainer = document.getElementById('form-container');
+            formContainer.style.display = 'flex';
+        }
+
+        function sendJoinRequest() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const country = document.getElementById('country').value;
+            const reason = document.getElementById('reason').value;
+            const countryCode = document.getElementById('country-code').value;
+
+            if (name && phone && country && reason) {
+                const fullPhone = `${countryCode}${phone}`.replace(/\s+/g, '');
+                members.push({ name, phone: fullPhone, country, reason });
+                alert('تم تقديم طلب الانضمام بنجاح!');
+                goBack();
+            } else {
+                alert('يرجى تعبئة جميع الحقول.');
+            }
+        }
+
+        function hideButtons() {
+            const buttonsContainer = document.getElementById('buttons-container');
+            buttonsContainer.style.display = 'none';
+        }
+
+        function goBack() {
+            const buttonsContainer = document.getElementById('buttons-container');
+            const content = document.getElementById('content');
+            const formContainer = document.getElementById('form-container');
+            content.innerHTML = '';
+            formContainer.style.display = 'none';
+            buttonsContainer.style.display = 'flex';
+        }
+    </script> 
+ 
+</body></html>
